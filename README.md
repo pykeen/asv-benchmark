@@ -6,7 +6,7 @@ Benchmarks using the [airspeed velocity](https://asv.readthedocs.io/en/stable/in
 
 ## Installation
 
-```console
+```shell
 $ pip install -r requirements.txt
 ```
 
@@ -16,7 +16,10 @@ cf. https://asv.readthedocs.io/en/stable/using.html
 
 ### Run benchmark
 
-```console
+The following command runs the benchmark from the current master branch
+of PyKEEN:
+
+```shell
 $ asv run
 ```
 
@@ -24,10 +27,14 @@ The results are stored under `./results`.
 
 ### Show results
 
-```console
+```shell
 $ asv show
 ```
 
 ### Publish results
 
 This creates HTML pages of the report in the `./html` directory.
+
+```shell
+$ asv publish
+```
