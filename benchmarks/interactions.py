@@ -5,6 +5,7 @@ from pykeen.nn.modules import DistMultInteraction
 
 class DistMultSuite:
     """Suite for DistMult interaction."""
+
     # cf. https://asv.readthedocs.io/en/stable/writing_benchmarks.html#parametrized-benchmarks
     param_names = (
         "batch_size",
