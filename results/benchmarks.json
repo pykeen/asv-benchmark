@@ -1,0 +1,144 @@
+{
+    "interactions.DistMultSuite.time_score_h": {
+        "code": "class DistMultSuite:\n    def time_score_h(self, batch_size, dim, num_entities, num_relations):\n        \"\"\"Time score_h method.\"\"\"\n        self.instance.score_h(all_entities=self.all, r=self.r, t=self.t)\n\n    def setup(self, batch_size, dim, num_entities, num_relations):\n        \"\"\"Prepare.\"\"\"\n        self.instance = DistMultInteraction()\n        self.h = torch.rand(batch_size, dim)\n        self.r = torch.rand(batch_size, dim)\n        self.t = torch.rand(batch_size, dim)\n        self.all = torch.rand(num_entities, dim)",
+        "min_run_count": 2,
+        "name": "interactions.DistMultSuite.time_score_h",
+        "number": 0,
+        "param_names": [
+            "batch_size",
+            "dim",
+            "num_entities",
+            "num_relations"
+        ],
+        "params": [
+            [
+                "64"
+            ],
+            [
+                "64"
+            ],
+            [
+                "15000"
+            ],
+            [
+                "237"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "1d213e8a7c645dbbe8326f731ae1e47dbbea8eff7e1f7a7c87734d5182051289",
+        "warmup_time": -1
+    },
+    "interactions.DistMultSuite.time_score_hrt": {
+        "code": "class DistMultSuite:\n    def time_score_hrt(self, batch_size, dim, num_entities, num_relations):\n        \"\"\"Time score_hrt method.\"\"\"\n        self.instance.score_hrt(h=self.h, r=self.r, t=self.t)\n\n    def setup(self, batch_size, dim, num_entities, num_relations):\n        \"\"\"Prepare.\"\"\"\n        self.instance = DistMultInteraction()\n        self.h = torch.rand(batch_size, dim)\n        self.r = torch.rand(batch_size, dim)\n        self.t = torch.rand(batch_size, dim)\n        self.all = torch.rand(num_entities, dim)",
+        "min_run_count": 2,
+        "name": "interactions.DistMultSuite.time_score_hrt",
+        "number": 0,
+        "param_names": [
+            "batch_size",
+            "dim",
+            "num_entities",
+            "num_relations"
+        ],
+        "params": [
+            [
+                "64"
+            ],
+            [
+                "64"
+            ],
+            [
+                "15000"
+            ],
+            [
+                "237"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "cc67a717948a7eae0da84c135c7e1574ff9a18c305e99d8ef73043f33c10dd48",
+        "warmup_time": -1
+    },
+    "interactions.DistMultSuite.time_score_t": {
+        "code": "class DistMultSuite:\n    def time_score_t(self, batch_size, dim, num_entities, num_relations):\n        \"\"\"Time score_t method.\"\"\"\n        self.instance.score_t(h=self.h, r=self.r, all_entities=self.all)\n\n    def setup(self, batch_size, dim, num_entities, num_relations):\n        \"\"\"Prepare.\"\"\"\n        self.instance = DistMultInteraction()\n        self.h = torch.rand(batch_size, dim)\n        self.r = torch.rand(batch_size, dim)\n        self.t = torch.rand(batch_size, dim)\n        self.all = torch.rand(num_entities, dim)",
+        "min_run_count": 2,
+        "name": "interactions.DistMultSuite.time_score_t",
+        "number": 0,
+        "param_names": [
+            "batch_size",
+            "dim",
+            "num_entities",
+            "num_relations"
+        ],
+        "params": [
+            [
+                "64"
+            ],
+            [
+                "64"
+            ],
+            [
+                "15000"
+            ],
+            [
+                "237"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "cb5d256c57cc37b880970e2357ff68e73bac6c829327084bbc3a092058a3fd35",
+        "warmup_time": -1
+    },
+    "training.SLCWATrainingSuite.time_train": {
+        "code": "class SLCWATrainingSuite:\n    def time_train(self, dataset: str, filtered: bool, ratio: int, workers: bool):\n        \"\"\"Time training.\"\"\"\n        self.trainer.train(\n            triples_factory=self.dataset.training,\n            num_epochs=self.num_epochs,\n            use_tqdm=False,\n            num_workers=cpu_count() - 1 if workers else 0,\n        )\n\n    def setup(self, dataset: str, filtered: bool, ratio: int, workers: bool):\n        \"\"\"Prepare.\"\"\"\n        self.device = resolve_device(\"cpu\")\n        self.dataset = get_dataset(dataset=dataset)\n        self.loss = MarginRankingLoss()\n        self.model = DistMult(\n            triples_factory=self.dataset.training,\n            preferred_device=self.device,\n            embedding_dim=self.embedding_dim,\n            loss=self.loss,\n            random_seed=random.randint(0, 2 ** 32 - 1),  # so there's no warning\n        )\n        self.optimizer = Adam(self.model.parameters())\n        negative_sampler = BasicNegativeSampler(\n            triples_factory=self.dataset.training,\n            num_negs_per_pos=ratio,\n            filtered=filtered,\n        )\n        self.trainer = SLCWATrainingLoop(\n            model=self.model,\n            optimizer=self.optimizer,\n            triples_factory=self.dataset.training,\n            negative_sampler=negative_sampler,\n        )",
+        "min_run_count": 2,
+        "name": "training.SLCWATrainingSuite.time_train",
+        "number": 0,
+        "param_names": [
+            "dataset",
+            "filtered",
+            "ratio",
+            "workers"
+        ],
+        "params": [
+            [
+                "'countries'",
+                "'nations'",
+                "'wn18rr'",
+                "'wn18'"
+            ],
+            [
+                "False",
+                "True"
+            ],
+            [
+                "10"
+            ],
+            [
+                "False",
+                "True"
+            ]
+        ],
+        "processes": 2,
+        "repeat": 0,
+        "sample_time": 0.01,
+        "timeout": 60.0,
+        "type": "time",
+        "unit": "seconds",
+        "version": "1845fb4a23a82d642580ddb250184219f441a1c5006ef70447e44fdc0b8a989b",
+        "warmup_time": -1
+    },
+    "version": 2
+}
