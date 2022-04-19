@@ -70,9 +70,10 @@ def main(
 
     # make absolute
     output_root = output_root.expanduser().resolve()
+    logger.info(f"Resolved output root: {output_root}")
 
     device = resolve_device(device=None)
-    logging.info(f"Running on device: {device}")
+    logger.info(f"Running on device: {device}")
 
     system_information = _collect_system_information()
 
