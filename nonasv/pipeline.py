@@ -156,7 +156,9 @@ def main(
             {
                 "training": results["times"]["training"] / num_epochs,
                 "evaluation": results["times"]["evaluation"],
-                "batch_size.evaluation": results["evaluator_metadata"]["batch_size"],
+                "batch_size.evaluation": results.get("evaluator_metadata", {}).get(
+                    "batch_size", None
+                ),
                 "path": path.relative_to(configuration_root).as_posix(),
             }
         )
