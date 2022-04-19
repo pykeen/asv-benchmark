@@ -1,0 +1,20 @@
+{
+  "comments": "The number of epochs has been inferred from the convergence experiment plot, Figure 2b. The publication favours SGD optimizer over others to ensure comaparabiltiy to RSGD, which is used to optimize the hyperbolic models studied in the same paper. The evaluation uses the non-deterministic variant of rank computation. While it is not guaranteed to yield the same results as average ranking definition due to the unknown properties of the employed sort algorithm (e.g. stability), it is closest to the average rank definition.",
+  "system": {
+    "gpu": {
+      "compute_capability": [
+        7,
+        5
+      ],
+      "cuda": "11.3",
+      "cudnn": 8200,
+      "name": "Quadro RTX 8000",
+      "total_memory": 50962169856
+    },
+    "machine": "x86_64",
+    "release": "5.4.0-81-generic",
+    "system": "Linux",
+    "torch_version": "1.10.0+cu113"
+  },
+  "title": "Learn FB15K-237 Dataset with MuRE as described by Bala\u017eevi\u0107 et al., 2019"
+}

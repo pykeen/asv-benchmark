@@ -1,0 +1,20 @@
+{
+  "comment": "For evaluation, the non-deterministic rank definition is used, cf. https://github.com/TimDettmers/ConvE/blob/5feb358eb7dbd1f534978cdc4c20ee0bf919148a/evaluation.py#L67.",
+  "system": {
+    "gpu": {
+      "compute_capability": [
+        7,
+        5
+      ],
+      "cuda": "11.3",
+      "cudnn": 8200,
+      "name": "Quadro RTX 8000",
+      "total_memory": 50962169856
+    },
+    "machine": "x86_64",
+    "release": "5.4.0-81-generic",
+    "system": "Linux",
+    "torch_version": "1.10.0+cu113"
+  },
+  "title": "Learn WN18RR Dataset with ConvE as described by Dettmers et al., 2018"
+}

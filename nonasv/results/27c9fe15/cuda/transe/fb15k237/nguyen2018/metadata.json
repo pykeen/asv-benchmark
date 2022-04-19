@@ -1,0 +1,20 @@
+{
+  "comments": "TransE was used to initialize the emebddigns. Could not find batch size and number of epochs.",
+  "system": {
+    "gpu": {
+      "compute_capability": [
+        7,
+        5
+      ],
+      "cuda": "11.3",
+      "cudnn": 8200,
+      "name": "Quadro RTX 8000",
+      "total_memory": 50962169856
+    },
+    "machine": "x86_64",
+    "release": "5.4.0-81-generic",
+    "system": "Linux",
+    "torch_version": "1.10.0+cu113"
+  },
+  "title": "Learn FB15k-237 Dataset with ConvKB as described by Nguyen et al., 2018"
+}
