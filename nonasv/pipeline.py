@@ -61,8 +61,15 @@ def main(
     log_level: str,
     debug: bool,
 ):
-    """"""
+    """
+    Run all packaged reproducibility configurations and save results for a given commit.
+
+    Also reduces the number of training epochs to reduce runtime.
+    """
     logging.basicConfig(level=log_level)
+
+    # make absolute
+    output_root = output_root.expanduser().resolve()
 
     device = resolve_device(device=None)
     logging.info(f"Running on device: {device}")
