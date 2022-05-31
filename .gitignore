@@ -405,3 +405,6 @@ tags
 
 pykeen/
 html/
+
+# slurm
+slurm-*.out
